@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ua.training.restaurant.entity.Dish;
-import ua.training.restaurant.entity.Order;
-import ua.training.restaurant.entity.User;
+import ua.training.restaurant.entity.*;
 import ua.training.restaurant.service.DishService;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.UserService;
 import ua.training.restaurant.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 @Controller
 @RequestMapping("/user/*")
@@ -95,6 +98,7 @@ public class UserController {
         Dish dish = null;
         if (id != null) {
             dish = dishService.findByID(id).get();
+            //dish = dishService.findByID(id).orElseThrow();
         }
         if (dish != null) {
             Order order = Utils.getOrderInSession(request);
@@ -112,5 +116,31 @@ public class UserController {
     public ModelAndView saveOrderToDB(ModelAndView modelAndView, Order order, @AuthenticationPrincipal User user) {
         orderService.save(order,user);
         return modelAndView;
+    }
+    @GetMapping("/billpaying")
+    public ModelAndView billPayingPage(ModelAndView modelAndView, @AuthenticationPrincipal User user) {
+        List<Order> orders = orderService.findByUser(user);
+        List<Bill> bills = new ArrayList<>();
+        orders.stream().filter(x->x.getStatus().equals(Order_Status.UNPAID)).forEach(x->bills.add(new Bill(x)));
+        modelAndView.addObject("bills",bills);
+        modelAndView.setViewName("billpaying");
+        return modelAndView;
+    }
+    @GetMapping("/paybill")
+    public String payBill(@AuthenticationPrincipal User user, @RequestParam Long id) {
+        Order order = orderService.findById(id).get();
+        //Order order = orderService.findById(id).orElseThrow();
+        if(order.getAmountTotal()>user.getFunds()) {
+
+        } else {
+            user.setFunds(user.getFunds()-order.getAmountTotal());
+            user.setOrdersTotalCost(user.getOrdersTotalCost()+order.getAmountTotal());
+            user.setOrdersNumber(user.getOrdersNumber()+1);
+            userService.saveOrUpdate(user);
+            order.setStatus(Order_Status.PAID);
+            order.setPaid(now());
+            orderService.update(order);
+        }
+        return "redirect:/user/billpaying";
     }
 }

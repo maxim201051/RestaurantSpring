@@ -60,6 +60,7 @@
                         <th th:text="#{concreteuserstatistic.table.created}"></th>
                         <th th:text="#{concreteuserstatistic.table.accepted}"></th>
                         <th th:text="#{concreteuserstatistic.table.ready}"></th>
+                        <th th:text="#{concreteuserstatistic.table.paid}"></th>
                         <th th:text="#{differentpages.label.view}"></th>
                     </tr>
                     </thead>
@@ -69,10 +70,10 @@
                     </tr>
                     <tr th:each="order : ${orders}">
                         <td><span th:text="${order.status}"> Status </span></td>
-                        <td><span th:text="${#dates.format(order.created,'dd-MM-yyyy HH:mm')}"> Created </span></td>
-                        <td><span th:text="${#dates.format(order.accepted,'dd-MM-yyyy HH:mm')}"> Accepted </span></td>
-                        <td><span th:text="${#dates.format(order.ready,'dd-MM-yyyy HH:mm')}"> Ready </span></td>
-                        <td><span th:text="${#dates.format(order.paid,'dd-MM-yyyy HH:mm')}"> Ready </span></td>
+                        <td><span th:text="${#temporals.format(order.created,'dd-MM-yyyy HH:mm')}"> Created </span></td>
+                        <td><span th:text="${#temporals.format(order.accepted,'dd-MM-yyyy HH:mm')}"> Accepted </span></td>
+                        <td><span th:text="${#temporals.format(order.ready,'dd-MM-yyyy HH:mm')}"> Ready </span></td>
+                        <td><span th:text="${#temporals.format(order.paid,'dd-MM-yyyy HH:mm')}"> Paid </span></td>
                         <td><a th:text="#{differentpages.label.view}" th:href="@{/order(id=${order.id})}">View</a></td>
                     </tr>
                     </tbody>
