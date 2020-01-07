@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{foodmenu.title}"></title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<th:block th:include="/_header"/>
+<th:block th:include="/_menu"/>
+<div class="limiter">
+    <div class="container-table">
+        <div class="wrap-table">
+            <div class="table">
+                <table th:object="${dishes}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{foodmenu.table.nameEn}">Name en </th>
+                        <th th:text="#{foodmenu.table.nameUa}"> Name ua </th>
+                        <th th:text="#{foodmenu.table.portion}"> Portion </th>
+                        <th th:text="#{foodmenu.table.price}"> Price </th>
+                        <th th:text="#{foodmenu.button.addtoorder}"> Add to order</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dish : ${dishes}">
+                        <td><span th:text="${dish.nameEn}"> Name EN </span></td>
+                        <td><span th:text="${dish.nameUa}"> Name UA</span></td>
+                        <td><span th:text="${dish.portion}"> Portion </span></td>
+                        <td><span th:text="${dish.price}"> Price </span></td>
+                        <td><a th:text="#{foodmenu.button.addtoorder}" th:href="@{/user/buyproduct(id=${dish.id})}"> Add to order</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <button class="btn btn-lg btn-primary btn-block" th:text="#{foodmenu.button.confirmation}" th:method="get" th:action="@{/user/shoppingcart}"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"/>
+</body>
+</html>

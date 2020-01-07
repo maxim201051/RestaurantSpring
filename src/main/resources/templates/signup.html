@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title th:text="#{signup.title}"></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<th:block th:include="/_menu"/>
+<div align="center" class="container">
+    <form class="form-signup" th:object="${user}" th:action="@{signup}"  action="#" method="post">
+        <h2 class="form-signin-heading" th:text="#{authentication.label.enterData}"></h2>
+            <div th:if="${alreadyRegisteredMessage}"
+             class="alert alert-danger" role="alert"
+             th:text="#{${alreadyRegisteredMessage}}">
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+            <label th:text="#{signup.label.error}"></label>
+        </div>
+        <p>
+            <label for="nameEn" class="sr-only">Name En</label>
+            <input type="text" th:field="*{nameEN}" id="nameEn" name="nameEn" class="form-control" th:placeholder="#{signup.label.nameEn}"
+                   required autofocus>
+        </p>
+        <p>
+            <label for="nameUa" class="sr-only">Name Ua</label>
+            <input type="text" th:field="*{nameUA}" id="nameUa" name="nameUa" class="form-control" th:placeholder="#{signup.label.nameUa}"
+                   required autofocus>
+        </p>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" th:field="*{username}" id="username" name="username" class="form-control"
+                   th:placeholder="#{authentication.label.username}" required autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" th:field="*{password}" id="password" name="password" class="form-control"
+                   th:placeholder="#{authentication.label.password}" required>
+        </p>
+        <input name="_csrf" type="hidden" value="900d2f30-bf67-43a2-86f0-016a9d5914a9"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{signup.button.signUp}">
+            <in></in>
+        </button>
+        <div class="row row justify-content-center">
+            <div><p class="message" th:text="#{signup.label.isAlreadyRegistered}"></p></div>
+            <div><a href="login" th:text="#{signup.label.logIn}"></a></div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

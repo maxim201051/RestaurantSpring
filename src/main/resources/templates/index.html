@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{home.title}"></title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="/../css/index.css" th:href="@{/css/index.css}"
+    />
+</head>
+<body>
+<header class="header">
+    <div class="brand-box">
+        <span class="brand">Restaurant</span>
+    </div>
+
+    <div class="text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary-main">Heading Primary Main</span>
+            <span class="heading-primary-sub">The secondary heading</span>
+        </h1>
+        <a href="/login" th:text="#{index.button.lestEat}" class="btn btn-white btn-animated">Let's eat</a>
+    </div>
+</header>
+<th:block th:include="/_footer"/>
+</body>
+</html>

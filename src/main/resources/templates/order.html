@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userstatistics.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<th:block th:include="/_header"/>
+<th:block th:include="/_menu"/>
+<div class="limiter">
+    <div class="container-table">
+        <div class="wrap-table">
+            <div class="table">
+                <table th:object="${order_units}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{foodmenu.table.nameUa}"></th>
+                        <th th:text="#{foodmenu.table.nameEn}"></th>
+                        <th th:text="#{foodmenu.table.portion}"></th>
+                        <th th:text="#{foodmenu.table.price}"></th>
+                        <th th:text="#{order.table.quantity}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order_unit : ${order_units.get().orderUnits}">
+                        <td><span th:text="${order_unit.dish.nameUa}"> Name UA</span></td>
+                        <td><span th:text="${order_unit.dish.nameEn}"> Name EN </span></td>
+                        <td><span th:text="${order_unit.dish.portion}"> Portion </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span></td>
+                        <td><span th:text="${order_unit.quantity}"> Quantity </span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"/>
+</body>
+</html>

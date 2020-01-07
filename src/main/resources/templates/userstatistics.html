@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{userstatistics.title}"></title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<th:block th:include="/_header"/>
+<th:block th:include="/_menu"/>
+<div class="limiter">
+    <div class="container-table">
+        <div class="wrap-table">
+            <div class="table">
+                <table th:object="${users}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{authentication.label.username}"></th>
+                        <th th:text="#{signup.label.nameUa}"></th>
+                        <th th:text="#{signup.label.nameEn}"></th>
+                        <th th:text="#{userstatistics.table.funds}"></th>
+                        <th th:text="#{userstatistics.table.ordersNumber}"></th>
+                        <th th:text="#{userstatistics.table.ordersTotalCost}"></th>
+                        <th th:text="#{userstatistics.table.registrationDate}"></th>
+                        <th th:text="#{differentpages.label.view}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${users.isEmpty()}">
+                        <td colspan="8"> No Users Available</td>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <td><span th:text="${user.username}"> Username </span></td>
+                        <td><span th:text="${user.nameUA}"> Name UA</span></td>
+                        <td><span th:text="${user.nameEN}"> Name EN </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(user.funds,3,2,'COMMA')}"> Funds </span></td>
+                        <td><span th:text="${user.ordersNumber}"> Orders Number </span></td>
+                        <td><span th:text="${user.ordersTotalCost}"> Orders Total Cost </span></td>
+                        <td><span th:text="${user.registrationDate}"> Registration Date </span></td>
+                        <td>
+                            <a th:text="#{differentpages.label.view}" th:href="@{/admin/concreteuserstatistic(id=${user.id})}">View</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"/>
+</body>
+</html>

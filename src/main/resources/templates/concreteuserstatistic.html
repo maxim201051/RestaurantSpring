@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{concreteuserstatistic.title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userstatistics.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<th:block th:include="/_header"/>
+<th:block th:include="/_menu"/>
+<div class="limiter">
+    <div class="container-table">
+        <div class="wrap-table">
+            <div class="table">
+                <table th:object="${user}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{authentication.label.username}"></th>
+                        <th th:text="#{signup.label.nameUa}"></th>
+                        <th th:text="#{signup.label.nameEn}"></th>
+                        <th th:text="#{userstatistics.table.funds}"></th>
+                        <th th:text="#{userstatistics.table.ordersNumber}"></th>
+                        <th th:text="#{userstatistics.table.ordersTotalCost}"></th>
+                        <th th:text="#{userstatistics.table.registrationDate}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span th:text="${user.username}"> Username </span></td>
+                        <td><span th:text="${user.nameUA}"> Name UA</span></td>
+                        <td><span th:text="${user.nameEN}"> Name EN </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(user.funds,3,2,'COMMA')}"> Funds </span></td>
+                        <td><span th:text="${user.ordersNumber}"> Orders Number </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(user.ordersTotalCost,3,2,'COMMA')}"> Orders Total Cost </span>
+                        </td>
+                        <td><span th:text="${user.registrationDate}"> Registration Date </span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:align="center">
+                <h2>All your orders</h2>
+            </div>
+            <div class="table">
+                <table th:object="${orders}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{concreteuserstatistic.table.status}"></th>
+                        <th th:text="#{concreteuserstatistic.table.created}"></th>
+                        <th th:text="#{concreteuserstatistic.table.accepted}"></th>
+                        <th th:text="#{concreteuserstatistic.table.ready}"></th>
+                        <th th:text="#{differentpages.label.view}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${orders.isEmpty()}">
+                        <td colspan="5"> No Orders Available</td>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <td><span th:text="${order.status}"> Status </span></td>
+                        <td><span th:text="${#dates.format(order.created,'dd-MM-yyyy HH:mm')}"> Created </span></td>
+                        <td><span th:text="${#dates.format(order.accepted,'dd-MM-yyyy HH:mm')}"> Accepted </span></td>
+                        <td><span th:text="${#dates.format(order.ready,'dd-MM-yyyy HH:mm')}"> Ready </span></td>
+                        <td><span th:text="${#dates.format(order.paid,'dd-MM-yyyy HH:mm')}"> Ready </span></td>
+                        <td><a th:text="#{differentpages.label.view}" th:href="@{/order(id=${order.id})}">View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"/>
+</body>
+</html>

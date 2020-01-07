@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<th:block th:include="/_header"/>
+<th:block th:include="/_menu"/>
+
+<div class="limiter">
+    <div class="container-table">
+        <div class="page-title" th:align="center">User Orders</div>
+        <div class="wrap-table">
+            <div class="table">
+                <table th:object="${bills}">
+                    <thead class="table-head">
+                    <tr>
+                        <th th:text="#{orderconfirmatiom.table.orderNumber}"></th>
+                        <th th:text="#{authentication.label.username}"></th>
+                        <th th:text="#{orderconfirmatiom.table.totalQuantity}"></th>
+                        <th th:text="#{shoppingcart.table.totalCost}"></th>
+                        <th th:text="#{orderconfirmatiom.table.creationDate}"></th>
+                        <th th:text="#{billmaking.button.makeBill}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${bills.isEmpty()}">
+                        <td colspan="6"> No Bills To Pay</td>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <td><span th:text="${order.id}"> Order Number </span></td>
+                        <td><span th:text="${order.user.username}"> Username </span></td>
+                        <td><span th:text="${order.quantityTotal}"> Total Quantity </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(order.amountTotal,3,2,'COMMA')}"> Total Cost </span></td>
+                        <td><span th:text="${#temporals.format(order.created,'dd-MM-yyyy HH:mm')}"> Creation Date </span></td>
+                        <td><a th:text="#{billmaking.button.makeBill}" th:href="@{/admin/makebill(id=${order.id})}"> Make Bill </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"/>
+</body>
+</html>
