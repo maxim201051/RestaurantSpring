@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                     <tr th:if="${users.isEmpty()}">
-                        <td colspan="8"> No Users Available</td>
+                        <td colspan="8" th:text="#{userstatistics.label.noUsers}"></td>
                     </tr>
                     <tr th:each="user : ${users}">
                         <td><span th:text="${user.username}"> Username </span></td>

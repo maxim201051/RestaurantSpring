@@ -50,7 +50,7 @@
                 </table>
             </div>
             <div th:align="center">
-                <h2>All your orders</h2>
+                <h2 th:text="#{concreteuserstatistic.label.allOrders}"></h2>
             </div>
             <div class="table">
                 <table th:object="${orders}">
@@ -66,7 +66,7 @@
                     </thead>
                     <tbody>
                     <tr th:if="${orders.isEmpty()}">
-                        <td colspan="5"> No Orders Available</td>
+                        <td colspan="5" th:text="#{concreteuserstatistic.label.noOrders}"></td>
                     </tr>
                     <tr th:each="order : ${orders}">
                         <td><span th:text="${order.status}"> Status </span></td>

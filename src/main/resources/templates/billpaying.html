@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Shopping Cart</title>
+    <title th:text="#{billpayind.title}"></title>
     <link rel="stylesheet"
           type="text/css"
           href="/../css/index.css" th:href="@{/css/userstatistics.css}"
@@ -25,7 +25,7 @@
 
 <div class="limiter">
     <div class="container-table">
-        <div class="page-title" th:align="center">Your Bills</div>
+        <div class="page-title" th:align="center" th:text="#{billpaying.label.yourBills}"></div>
         <div class="wrap-table">
             <div class="table">
                 <table th:object="${bills}">
@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                     <tr th:if="${bills.isEmpty()}">
-                        <td colspan="6"> No Bills To Pay</td>
+                        <td colspan="6" th:text="#{billpaying.label.noBills}"></td>
                     </tr>
                     <tr th:each="bill : ${bills}">
                         <td><span th:text="${bill.id}"> Order Number </span></td>
