@@ -1,4 +1,4 @@
-package ua.training.restaurant.entity;
+package ua.training.restaurant.entity.user;
 
 import org.springframework.security.core.GrantedAuthority;
 

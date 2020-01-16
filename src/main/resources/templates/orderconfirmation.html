@@ -20,13 +20,16 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
 
 <div class="limiter">
     <div class="container-table">
         <div class="page-title" th:align="center" th:text="#{billmaking.label.userOrders}"></div>
         <div class="wrap-table">
+            <div th:align="center" th:if="${failureMessage}"
+                 class="alert alert-danger" role="alert"
+                 th:text="#{${failureMessage}}">
+            </div>
             <div class="table">
                 <table th:object="${orders}">
                     <thead class="table-head">

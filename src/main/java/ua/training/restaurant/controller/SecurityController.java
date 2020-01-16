@@ -7,14 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ua.training.restaurant.entity.Role;
-import ua.training.restaurant.entity.User;
+import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.service.UserService;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class SecurityController {
@@ -44,11 +40,12 @@ public class SecurityController {
     @PostMapping("/signup")
     public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult) {
         if (userService.isUserExists(user.getUsername())) {
-            modelAndView.addObject("alreadyRegisteredMessage","signup.label.alreadyRegistered");
+            modelAndView.addObject("failureMessage","signup.label.alreadyRegistered");
             modelAndView.setViewName("signup");
             bindingResult.reject("username");
         }
         if (bindingResult.hasErrors() || !UtilityController.checkUserFieldsWithRegex(user)) {
+            modelAndView.addObject("failureMessage","signup.label.error");
             modelAndView.setViewName("signup");
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));

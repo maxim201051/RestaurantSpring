@@ -1,4 +1,4 @@
-package ua.training.restaurant.controller;
+package ua.training.restaurant.entity;
 
 public interface RegexContainer {
     String NAME_REGEX = "^[A-Z][a-z]{3,20}$";

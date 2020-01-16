@@ -1,6 +1,7 @@
 package ua.training.restaurant.controller;
 
-import ua.training.restaurant.entity.User;
+import ua.training.restaurant.entity.RegexContainer;
+import ua.training.restaurant.entity.user.User;
 
 public class UtilityController {
     public static boolean checkUserFieldsWithRegex(User user) {

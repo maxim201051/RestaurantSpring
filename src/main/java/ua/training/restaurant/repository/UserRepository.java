@@ -2,8 +2,8 @@ package ua.training.restaurant.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ua.training.restaurant.entity.Role;
-import ua.training.restaurant.entity.User;
+import ua.training.restaurant.entity.user.Role;
+import ua.training.restaurant.entity.user.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
 
     List<User> findByAuthoritiesContaining(Role role);
+
+
 }

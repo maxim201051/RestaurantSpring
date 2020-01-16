@@ -20,7 +20,6 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
 <div class="limiter">
     <div class="container-table">
@@ -47,8 +46,8 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <button class="btn btn-lg btn-primary btn-block" th:text="#{foodmenu.button.confirmation}" th:method="get" th:action="@{/user/shoppingcart}"></button>
+            <div th:align="center">
+                <a class="btn" href="/signup" th:text="#{foodmenu.button.confirmation}" th:href="@{/user/shoppingcart}"></a>
             </div>
         </div>
     </div>

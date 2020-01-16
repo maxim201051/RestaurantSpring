@@ -17,7 +17,6 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
 <div class="limiter">
     <div class="container-table">
@@ -44,7 +43,7 @@
                         <td><span th:text="${user.ordersNumber}"> Orders Number </span></td>
                         <td><span th:text="${#numbers.formatDecimal(user.ordersTotalCost,3,2,'COMMA')}"> Orders Total Cost </span>
                         </td>
-                        <td><span th:text="${user.registrationDate}"> Registration Date </span></td>
+                        <td><span th:text="${#temporals.format(user.registrationDate,'dd-MM-yyyy')}"> Registration Date </span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -56,6 +55,8 @@
                 <table th:object="${orders}">
                     <thead class="table-head">
                     <tr>
+                        <th th:text="#{orderconfirmatiom.table.orderNumber}"></th>
+                        <th th:text="#{shoppingcart.table.totalCost}"></th>
                         <th th:text="#{concreteuserstatistic.table.status}"></th>
                         <th th:text="#{concreteuserstatistic.table.created}"></th>
                         <th th:text="#{concreteuserstatistic.table.accepted}"></th>
@@ -66,9 +67,11 @@
                     </thead>
                     <tbody>
                     <tr th:if="${orders.isEmpty()}">
-                        <td colspan="5" th:text="#{concreteuserstatistic.label.noOrders}"></td>
+                        <td colspan="7" th:text="#{concreteuserstatistic.label.noOrders}"></td>
                     </tr>
                     <tr th:each="order : ${orders}">
+                        <td><span th:text="${order.id}"> Order Number</span></td>
+                        <td><span th:text="${#numbers.formatDecimal(order.amountTotal,3,2,'COMMA')}"> Total Cost</span></td>
                         <td><span th:text="${order.status}"> Status </span></td>
                         <td><span th:text="${#temporals.format(order.created,'dd-MM-yyyy HH:mm')}"> Created </span></td>
                         <td><span th:text="${#temporals.format(order.accepted,'dd-MM-yyyy HH:mm')}"> Accepted </span></td>

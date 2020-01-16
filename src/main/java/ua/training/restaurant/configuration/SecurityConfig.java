@@ -31,13 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         // The pages does not require login
-        http.authorizeRequests().antMatchers("/", "/login", "/logout", "/signup").permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll();
+        //Only for NOT authenticated users
+        http.authorizeRequests().antMatchers("/login", "/signup").not().authenticated();
+        //Only for authenticated users
+        http.authorizeRequests().antMatchers("/logout").authenticated();
         //Admin pages
         http.authorizeRequests().antMatchers("/user/**")
-                .access("hasAuthority(T(ua.training.restaurant.entity.Role).USER.getAuthority())");
+                .access("hasAuthority(T(ua.training.restaurant.entity.user.Role).USER.getAuthority())");
         //User pages
         http.authorizeRequests().antMatchers("/admin/**")
-                .access("hasAuthority(T(ua.training.restaurant.entity.Role).ADMIN.getAuthority())");
+                .access("hasAuthority(T(ua.training.restaurant.entity.user.Role).ADMIN.getAuthority())");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/");
 
         // Config for Login Form
@@ -55,7 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .invalidSessionUrl("/login");
+                .invalidSessionUrl("/login")
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false);
     }
 
     @Bean

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{addfunds.title}"></title>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
     <div align="center" th:action="@{addfunds}" class="container" th:object="${user}">
         <h1 th:text="#{addfunds.label.header}"></h1>
@@ -14,8 +15,9 @@
             <label th:text="#{addfunds.label.currentfunds}"></label>
             <label th:text="*{funds}"></label>
         </p>
-        <div th:if="${param.error}" class="alert alert-danger" role="alert">
-            <label th:text="#{addfunds.label.error}"></label>
+        <div th:align="center" th:if="${failureMessage}"
+             class="alert alert-danger" role="alert"
+             th:text="#{${failureMessage}}">
         </div>
         <form th:action="@{addfunds}" action="#" method="post">
             <h2 class="form-signin-heading" th:text="#{authentication.label.enterData}"></h2>
@@ -27,6 +29,5 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{addfunds.button.add}"></button>
         </form>
     </div>
-<th:block th:include="/_footer"/>
 </body>
 </html>

@@ -1,20 +1,36 @@
 package ua.training.restaurant.service;
 
-import org.aspectj.weaver.ast.Or;
-import ua.training.restaurant.entity.Order;
-import ua.training.restaurant.entity.Order_Status;
-import ua.training.restaurant.entity.User;
+import ua.training.restaurant.entity.Dish;
+import ua.training.restaurant.entity.order.Order;
+import ua.training.restaurant.entity.order.Order_Status;
+import ua.training.restaurant.entity.user.User;
+import ua.training.restaurant.exceptions.EmptyOrderException;
+import ua.training.restaurant.exceptions.OrderNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface OrderService {
     List<Order> findByUser(User user);
 
-    Optional<Order> findById(Long id);
+    Order findById(Long id) throws OrderNotFoundException;
 
-    Order save(Order order, User user);
+    Order save(Order order, User user) throws EmptyOrderException;
 
     List<Order> findByStatus(Order_Status order_status);
-    Order update(Order order) ;
+
+    Order update(Order order);
+
+    Order addDish(Order order, Dish dish, int quantity);
+
+    Order updateDish(Order order, Long id, int quantity);
+
+    Order removeDish(Order order, Dish dish);
+
+    Order updateQuantity(Order order1, Order order2);
+
+    List<Order> findByUserId(Long id);
+
+    void confirmOrder(Long id) throws OrderNotFoundException;
+
+    void setPaid(Order order);
 }

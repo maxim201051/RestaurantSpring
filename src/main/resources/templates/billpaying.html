@@ -20,33 +20,33 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
 
 <div class="limiter">
     <div class="container-table">
         <div class="page-title" th:align="center" th:text="#{billpaying.label.yourBills}"></div>
         <div class="wrap-table">
+            <div th:align="center" th:if="${failureMessage}"
+                 class="alert alert-danger" role="alert"
+                 th:text="#{${failureMessage}}">
+            </div>
             <div class="table">
                 <table th:object="${bills}">
                     <thead class="table-head">
                     <tr>
                         <th th:text="#{orderconfirmatiom.table.orderNumber}"></th>
-                        <th th:text="#{authentication.label.username}"></th>
-                        <th th:text="#{orderconfirmatiom.table.totalQuantity}"></th>
                         <th th:text="#{shoppingcart.table.totalCost}"></th>
-                        <th th:text="#{orderconfirmatiom.table.creationDate}"></th>
-                        <th th:text="#{billmaking.button.makeBill}"></th>
+                        <th th:text="#{billpaying.button.payBill}"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:if="${bills.isEmpty()}">
-                        <td colspan="6" th:text="#{billpaying.label.noBills}"></td>
+                        <td colspan="3" th:text="#{billpaying.label.noBills}"></td>
                     </tr>
                     <tr th:each="bill : ${bills}">
                         <td><span th:text="${bill.id}"> Order Number </span></td>
                         <td><span th:text="${#numbers.formatDecimal(bill.totalCost,3,2,'COMMA')}"> Total Cost </span></td>
-                        <td><a th:text="#{billmaking.button.makeBill}" th:href="@{/user/paybill(id=${bill.id})}"> Pay Bill </a></td>
+                        <td><a th:text="#{billpaying.button.payBill}" th:href="@{/user/paybill(id=${bill.id})}"> Pay Bill </a></td>
                     </tr>
                     </tbody>
                 </table>

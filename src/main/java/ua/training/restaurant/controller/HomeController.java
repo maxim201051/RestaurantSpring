@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.training.restaurant.entity.Order;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ua.training.restaurant.exceptions.OrderNotFoundException;
 import ua.training.restaurant.service.OrderService;
 
 @Controller
@@ -19,9 +20,14 @@ public class HomeController {
     }
 
     @GetMapping("/order")
-    public ModelAndView orderPage(ModelAndView modelAndView, @RequestParam Long id) {
-        modelAndView.addObject("order_units", orderService.findById(id));
-        modelAndView.setViewName("order");
+    public ModelAndView orderPage(ModelAndView modelAndView, @RequestParam Long id, RedirectAttributes redir) {
+        try {
+            modelAndView.addObject("order", orderService.findById(id));
+            modelAndView.setViewName("order");
+        } catch (OrderNotFoundException e) {
+            redir.addFlashAttribute("failureMessage","order.label.failureMessage");
+            modelAndView.setViewName("redirect:/index");
+        }
         return modelAndView;
     }
 }

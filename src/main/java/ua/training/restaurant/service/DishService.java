@@ -1,11 +1,12 @@
 package ua.training.restaurant.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import ua.training.restaurant.entity.Dish;
-
-import java.util.List;
-import java.util.Optional;
+import ua.training.restaurant.exceptions.DishNotFoundException;
 
 public interface DishService {
-    List<Dish> findAll();
-    Optional<Dish> findByID(Long id);
+    Page<Dish> findAll(Pageable pageable);
+
+    Dish findByID(Long id) throws DishNotFoundException;
 }

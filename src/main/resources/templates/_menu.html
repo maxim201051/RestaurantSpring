@@ -1,30 +1,49 @@
-<div class="menu-container"
-     xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
-    <a th:href="@{/}">Home</a>
-    |
-    <a th:href="@{/productList}">
-        Product List
-    </a>
-    |
-    <a th:href="@{/shoppingCart}">
-        My Cart
-    </a>
-    |
-    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-        <a th:href="@{/admin/orderList}">
-            Order List
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
+<div class="menu-row">
+    <div class="menu-container"
+         xmlns:th="http://www.thymeleaf.org"
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+        <a th:href="@{/}">
+            Home
         </a>
         |
-    </th:block>
-    <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-        <a th:href="@{/admin/product}">
-            Create Product
-        </a>
-        |
-    </th:block>
-    <a href="?lang=en" th:text="#{lang.en}"></a>
-    |
-    <a href="?lang=ua" th:text="#{lang.ua}"></a>
-    |
+        <th:block sec:authorize="">
+            <a th:href="@{/user/foodmenu}" th:text="#{foodmenu.title}"></a>
+            |
+            <a th:href="@{/user/shoppingcart}" th:text="#{shoppingcart.title}"></a>
+            |
+            <a th:href="@{/user/addfunds}" th:text="#{addfunds.title}"></a>
+            |
+            <a th:href="@{/user/billpaying}" th:text="#{billpayind.title}"></a>
+            |
+            <a th:href="@{/user/concreteuserstatistic}" th:text="#{concreteuserstatistic.title}"></a>
+            |
+        </th:block>
+
+        <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+            <a th:href="@{/admin/orderconfirmation}" th:text="#{orderconfirmation.title}"></a>
+            |
+            <a th:href="@{/admin/billmaking}" th:text="#{billmakint.title}"></a>
+            |
+            <a th:href="@{/admin/userstatistics}" th:text="#{userstatistics.title}"></a>
+            |
+        </th:block>
+    </div>
+    <div class="header-container"
+         xmlns:th="http://www.thymeleaf.org"
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+        <div class="header-bar">
+            <th:block sec:authorize="isAuthenticated()">
+                <a th:utext="${#request.userPrincipal.name}">..</a>
+                &nbsp;|&nbsp;
+                <a th:href="@{/logout}">Logout</a>
+            </th:block>
+            |
+            <a href="?lang=en" th:text="#{lang.en}"></a>
+            |
+            <a href="?lang=ua" th:text="#{lang.ua}"></a>
+            |
+        </div>
+    </div>
 </div>

@@ -2,7 +2,8 @@ package ua.training.restaurant.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import ua.training.restaurant.entity.order.Order;
+import ua.training.restaurant.entity.user.User;
 
 import java.util.List;
 

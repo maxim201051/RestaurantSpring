@@ -1,7 +1,6 @@
 package ua.training.restaurant.utils;
 
-import org.aspectj.weaver.ast.Or;
-import ua.training.restaurant.entity.Order;
+import ua.training.restaurant.entity.order.Order;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +11,7 @@ public class Utils {
         Order order = (Order) request.getSession().getAttribute("myOrder");
 
 
-        if (order == null) {
+        if (order == null) { //TODO Optional or Singleton
             order = new Order();
 
             request.getSession().setAttribute("myOrder", order);

@@ -20,98 +20,61 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<th:block th:include="/_header"/>
 <th:block th:include="/_menu"/>
 
 <div class="limiter">
     <div class="container-table">
         <div class="page-title" th:align="center" th:text="#{shoppingcart.label.yourOrder}"></div>
         <div class="wrap-table">
-            <div class="table">
-                <table th:object="${order}">
-                    <thead class="table-head">
-                    <tr>
-                        <th th:text="#{foodmenu.table.nameEn}"> Name en </th>
-                        <th th:text="#{foodmenu.table.nameUa}"> Name ua </th>
-                        <th th:text="#{foodmenu.table.portion}"> Portion </th>
-                        <th th:text="#{foodmenu.table.price}"> Price </th>
-                        <th th:text="#{order.table.quantity}"> Quantity </th>
-                        <th th:text="#{shoppingcart.button.updateQuantity}">Update Quantity </th>
-                        <th th:text="#{shoppingcart.table.totalCost}"> Total Cost </th>
-                        <th th:text="#{shoppingcart.button.delete}"> Delete </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${order.isEmpty()}">
-                        <td colspan="7" th:text="#{shoppingcart.label.noItems}">
-                            <a th:href="@{/user/foodmenu}" th:text="#{foodmenu.title}"></a>
-                        </td>
-                    </tr>
-                    <tr th:each="order_unit : ${order.orderUnits}">
-                        <td><span th:text="${order_unit.dish.nameEn}"> Name en </span></td>
-                        <td><span th:text="${order_unit.dish.nameUa}"> Name ua </span></td>
-                        <td><span th:text="${order_unit.dish.portion}"> Portion </span></td>
-                        <td><span th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span></td>
-                        <td><input type="number" th:value="${order_unit.quantity}"/></td>
-                        <td><a th:text="#{shoppingcart.button.delete}">Update Quantity</a></td>
-                        <td><span th:text="${order_unit.amount}"> Total Cost </span></td>
-                        <td><a th:text="#{shoppingcart.button.delete}" th:href="@{/user/shoppingcartremovedish(id=${order_unit.dish.id})}">Delete</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div th:align="center" th:if="${failureMessage}"
+                 class="alert alert-danger" role="alert"
+                 th:text="#{${failureMessage}}">
             </div>
-            <div>
-                <button class="btn btn-lg btn-primary btn-block" th:text="#{foodmenu.button.confirmation}" th:action="@{/user/shoppingcart}"></button>
-            </div>
+            <form method="post" action="/user/saveorder">
+                <div class="table">
+                    <table th:object="${order}">
+                        <thead class="table-head">
+                        <tr>
+                            <th th:text="#{foodmenu.table.nameEn}"> Name en</th>
+                            <th th:text="#{foodmenu.table.nameUa}"> Name ua</th>
+                            <th th:text="#{foodmenu.table.portion}"> Portion</th>
+                            <th th:text="#{foodmenu.table.price}"> Price</th>
+                            <th th:text="#{order.table.quantity}"> Quantity</th>
+                            <th th:text="#{shoppingcart.button.updateQuantity}">Update Quantity</th>
+                            <th th:text="#{shoppingcart.table.totalCost}"> Total Cost</th>
+                            <th th:text="#{shoppingcart.button.delete}"> Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${order.isEmpty()}">
+                            <td colspan="7" th:text="#{shoppingcart.label.noItems}">
+                                <a th:href="@{/user/foodmenu}" th:text="#{foodmenu.title}"></a>
+                            </td>
+                        </tr>
+                        <tr th:each="order_unit : ${order.orderUnits}">
+                            <td><span th:text="${order_unit.dish.nameEn}"> Name en </span></td>
+                            <td><span th:text="${order_unit.dish.nameUa}"> Name ua </span></td>
+                            <td><span th:text="${order_unit.dish.portion}"> Portion </span></td>
+                            <td><span
+                                    th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span>
+                            </td>
+                            <td><input type="number" th:value="${order_unit.quantity}"/></td>
+                            <td><a th:text="#{shoppingcart.button.updateQuantity}">Update Quantity</a></td>
+                            <td><span th:text="${order_unit.amount}"> Total Cost </span></td>
+                            <td><a th:text="#{shoppingcart.button.delete}"
+                                   th:href="@{/user/shoppingcartremovedish(id=${order_unit.dish.id})}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:align="center">
+                    <button class="btn" type="submit" th:text="#{shoppingcart.button.confirmOrder}"></button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-<!--
-<th:block th:if="${cartForm != null && cartForm.cartLines != null && !cartForm.cartLines.empty}">
-    <form method="POST" th:object="${cartForm}" th:action="@{/shoppingCart}">
-
-        <div class="product-preview-container"
-             th:each="cartLineInfo, varStatus : ${cartForm.cartLines}">
-            <ul>
-                <li>Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>
-                    <input type="hidden"
-                           th:name="|cartLines[${varStatus.index}].productInfo.code|"
-                           th:value="${cartLineInfo.productInfo.code}" />
-                </li>
-                <li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
-                <li>Price:
-                    <span class="price"
-                          th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
-                        </span>
-                </li>
-                <li>Quantity:
-                    <input
-                            th:name="|cartLines[${varStatus.index}].quantity|"
-                            th:value="${cartLineInfo.quantity}" />
-                </li>
-                <li>Subtotal:
-                    <span class="subtotal"
-                          th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
-                        </span>
-                </li>
-                <li>
-                    <a th:href="@{|/shoppingCartRemoveProduct?code=${cartLineInfo.productInfo.code}|}">
-                        Delete
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div style="clear: both"></div>
-        <input class="button-update-sc" type="submit" value="Update Quantity"/>
-        <a class="navi-item"
-           th:href="@{/foodmenu}">Continue Buy</a>
-    </form>
-</th:block>
--->
-
 <th:block th:include="/_footer"/>
-
 </body>
 </html>
 <!--User finally confirm his order-->

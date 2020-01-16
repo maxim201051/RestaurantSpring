@@ -1,4 +1,4 @@
-package ua.training.restaurant.entity;
+package ua.training.restaurant.entity.order;
 
 public enum Order_Status {
     CREATED,

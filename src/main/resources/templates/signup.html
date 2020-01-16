@@ -15,12 +15,9 @@
 <div align="center" class="container">
     <form class="form-signup" th:object="${user}" th:action="@{signup}"  action="#" method="post">
         <h2 class="form-signin-heading" th:text="#{authentication.label.enterData}"></h2>
-            <div th:if="${alreadyRegisteredMessage}"
+            <div th:if="${failureMessage}"
              class="alert alert-danger" role="alert"
-             th:text="#{${alreadyRegisteredMessage}}">
-        </div>
-        <div th:if="${param.error}" class="alert alert-danger" role="alert">
-            <label th:text="#{signup.label.error}"></label>
+             th:text="#{${failureMessage}}">
         </div>
         <p>
             <label for="nameEn" class="sr-only">Name En</label>

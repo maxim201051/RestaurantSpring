@@ -7,7 +7,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import ua.training.restaurant.entity.Role;
+import ua.training.restaurant.entity.user.Role;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +53,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         } else if (isUser(roles)) {
             url = "/user/";
         } else {
-            url = "/accessDenied";
+            url = "/index";
         }
         log.info("determineTargetUrl ==> " + url);
         return url;

@@ -1,11 +1,12 @@
-package ua.training.restaurant.entity;
+package ua.training.restaurant.entity.user;
 
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
+import ua.training.restaurant.entity.RegexContainer;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,13 +25,13 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "user_id_seq", strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank
+    @Pattern(regexp = RegexContainer.NAME_REGEX, message = "Invalid en name")
     @Column(name = "name_en", nullable = false)
     private String nameEN;
-    @NotBlank
+    @Pattern(regexp = RegexContainer.NAME_REGEX_UA, message = "Invalid ua name")
     @Column(name = "name_ua", nullable = false)
     private String nameUA;
-    @NotBlank
+    @Pattern(regexp = RegexContainer.USERNAME_REGEX, message = "Invalid username")
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
