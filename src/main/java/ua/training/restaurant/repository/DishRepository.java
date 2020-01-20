@@ -8,6 +8,9 @@ import ua.training.restaurant.entity.Dish;
 
 import java.util.Optional;
 
+/**
+ * Created by Student
+ */
 @Repository
 public interface DishRepository extends JpaRepository<Dish, Long> {
     Page<Dish> findAll(Pageable pageable);

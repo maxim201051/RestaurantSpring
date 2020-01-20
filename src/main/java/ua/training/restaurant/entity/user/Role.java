@@ -2,6 +2,9 @@ package ua.training.restaurant.entity.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * Created by Student
+ */
 public enum Role implements GrantedAuthority {
     USER,
     ADMIN;

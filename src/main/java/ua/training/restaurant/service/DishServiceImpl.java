@@ -9,6 +9,9 @@ import ua.training.restaurant.entity.Dish;
 import ua.training.restaurant.exceptions.DishNotFoundException;
 import ua.training.restaurant.repository.DishRepository;
 
+/**
+ * Created by Student
+ */
 @Slf4j
 @Service
 public class DishServiceImpl implements DishService {

@@ -11,13 +11,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Student
+ */
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order { //TODO get quantity and amount methods
+public class Order {
     @Id
     @SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "order_id_seq", name = "order_id_seq")
     @GeneratedValue(generator = "order_id_seq", strategy = GenerationType.SEQUENCE)

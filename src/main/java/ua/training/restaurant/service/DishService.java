@@ -5,6 +5,9 @@ import org.springframework.data.domain.Pageable;
 import ua.training.restaurant.entity.Dish;
 import ua.training.restaurant.exceptions.DishNotFoundException;
 
+/**
+ * Created by Student
+ */
 public interface DishService {
     Page<Dish> findAll(Pageable pageable);
 

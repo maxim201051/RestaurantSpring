@@ -21,33 +21,6 @@
 <div class="limiter">
     <div class="container-table">
         <div class="wrap-table">
-            <div class="table">
-                <table th:object="${user}">
-                    <thead class="table-head">
-                    <tr>
-                        <th th:text="#{authentication.label.username}"></th>
-                        <th th:text="#{signup.label.nameUa}"></th>
-                        <th th:text="#{signup.label.nameEn}"></th>
-                        <th th:text="#{userstatistics.table.funds}"></th>
-                        <th th:text="#{userstatistics.table.ordersNumber}"></th>
-                        <th th:text="#{userstatistics.table.ordersTotalCost}"></th>
-                        <th th:text="#{userstatistics.table.registrationDate}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span th:text="${user.username}"> Username </span></td>
-                        <td><span th:text="${user.nameUA}"> Name UA</span></td>
-                        <td><span th:text="${user.nameEN}"> Name EN </span></td>
-                        <td><span th:text="${#numbers.formatDecimal(user.funds,3,2,'COMMA')}"> Funds </span></td>
-                        <td><span th:text="${user.ordersNumber}"> Orders Number </span></td>
-                        <td><span th:text="${#numbers.formatDecimal(user.ordersTotalCost,3,2,'COMMA')}"> Orders Total Cost </span>
-                        </td>
-                        <td><span th:text="${#temporals.format(user.registrationDate,'dd-MM-yyyy')}"> Registration Date </span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             <div th:align="center">
                 <h2 th:text="#{concreteuserstatistic.label.allOrders}"></h2>
             </div>

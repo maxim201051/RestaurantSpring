@@ -7,6 +7,9 @@ import ua.training.restaurant.entity.user.User;
 
 import java.util.List;
 
+/**
+ * Created by Student
+ */
 @Getter
 @Setter
 public class Bill {

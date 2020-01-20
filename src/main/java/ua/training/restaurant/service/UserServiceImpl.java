@@ -6,21 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ua.training.restaurant.controller.UtilityController;
 import ua.training.restaurant.entity.order.Order;
-import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.exceptions.NotEnoughtFundsException;
 import ua.training.restaurant.repository.UserRepository;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.time.LocalDateTime.now;
-
+/**
+ * Created by Student
+ */
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,24 +29,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> listAll() {
-        return new ArrayList<>(userRepository.findAll());
-    }
-
-    @Override
-    public User getById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    @Override
     public User saveOrUpdate(User user) {
         userRepository.save(user);
         return user;
-    }
-
-    @Override
-    public boolean isUserExists(String username) {
-        return userRepository.existsByUsername(username);
     }
 
     @Override
@@ -57,6 +39,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException("user " + username + " was not found!"));
     }
+
     public List<User> findAllUsers() { //means role.user
         return userRepository.findByAuthoritiesContaining(Role.USER);
     }
@@ -78,24 +61,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addOrderToStatistic(User user, Order order) throws NotEnoughtFundsException {
-        if (order.getAmountTotal() > user.getFunds()) {
-            throw new NotEnoughtFundsException();
-        } else {
-            user.setFunds(user.getFunds() - order.getAmountTotal());
-            user.setOrdersTotalCost(user.getOrdersTotalCost() + order.getAmountTotal());
-            user.setOrdersNumber(user.getOrdersNumber() + 1);
-
-        }
+    public User addOrderToStatistic(User user, Order order) {
+        user.setFunds(user.getFunds() - order.getAmountTotal());
+        user.setOrdersTotalCost(user.getOrdersTotalCost() + order.getAmountTotal());
+        user.setOrdersNumber(user.getOrdersNumber() + 1);
+        return user;
     }
 
     @Override
-    public void addFunds(User user, Long funds) {
-        if (UtilityController.checkFundsToAdd(funds)) {
-            user.setFunds(user.getFunds() + funds);
-            saveOrUpdate(user);
-        } else {
-            throw new IllegalArgumentException();
-        }
+    public User addFunds(User user, Long funds) {
+        user.setFunds(user.getFunds() + funds);
+        saveOrUpdate(user);
+        return user;
     }
 }

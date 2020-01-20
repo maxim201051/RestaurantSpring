@@ -5,12 +5,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import ua.training.restaurant.entity.RegexContainer;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Created by Student
+ */
 @Getter
 @Setter
 @Builder
@@ -37,7 +39,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @Size(min=3,max=100)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int8 check(funds between 0 and 1000000)")
     private Long funds; //in US pennies
     @Column(nullable = false)
     private int ordersNumber;

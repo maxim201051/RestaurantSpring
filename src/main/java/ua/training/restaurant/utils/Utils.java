@@ -3,20 +3,21 @@ package ua.training.restaurant.utils;
 import ua.training.restaurant.entity.order.Order;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
+/**
+ * Created by Student
+ */
 public class Utils {
     //Products in the order, stored in Session.
     public static Order getOrderInSession(HttpServletRequest request) {
 
         Order order = (Order) request.getSession().getAttribute("myOrder");
 
-
-        if (order == null) { //TODO Optional or Singleton
+        if (!Optional.ofNullable(order).isPresent()) { //TODO Optional, Singleton
             order = new Order();
-
             request.getSession().setAttribute("myOrder", order);
         }
-
         return order;
     }
 
@@ -30,5 +31,9 @@ public class Utils {
 
     public static Order getLastOrderedOrderInSession(HttpServletRequest request) {
         return (Order) request.getSession().getAttribute("lastOrderedOrder");
+    }
+    public static void throwExIfFundsNotValid(Long funds) {
+        if (funds<0 || funds>100000)
+            throw new IllegalArgumentException();
     }
 }

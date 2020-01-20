@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Created by Student
+ */
 @Component
 @Slf4j
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -32,10 +35,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         }
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
-
-    /*
+    /**
      * This method extracts the roles of currently logged-in user and returns
      * appropriate URL according to his/her role.
+     * @param authentication
+     * @return
      */
     protected String findRedirectURLForUserRole(Authentication authentication) {
         String url = "";
@@ -59,10 +63,19 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         return url;
     }
 
+    /**
+     * Check is user have user authority
+     * @param roles
+     * @return
+     */
     private boolean isUser(List<String> roles) {
         return roles.contains(Role.USER.getAuthority());
     }
-
+    /**
+     * Check is user have admin authority
+     * @param roles
+     * @return
+     */
     private boolean isAdmin(List<String> roles) {
         return roles.contains(Role.ADMIN.getAuthority());
     }

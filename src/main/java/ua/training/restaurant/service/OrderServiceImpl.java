@@ -11,12 +11,14 @@ import ua.training.restaurant.exceptions.EmptyOrderException;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
 import ua.training.restaurant.repository.OrderRepository;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import static java.time.LocalDateTime.now;
 
+/**
+ * Created by Student
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
@@ -38,12 +40,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order save(Order order, User user) throws EmptyOrderException {
-        if(!order.isEmpty()) {
+        if (!order.isEmpty()) {
             order.setUser(user);
             order.setStatus(Order_Status.CREATED);
             order.setCreated(now());
             orderRepository.save(order);
-        }else {
+        } else {
             throw new EmptyOrderException();
         }
         return order;
@@ -60,59 +62,51 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-    private OrderUnit findOrderUnitById(Order order, Long id) {
-        for (OrderUnit unit : order.getOrderUnits()) {
-            if (unit.getDish().getId().equals(id)) {
-                return unit;
-            }
-        }
-        return null;
+    private Optional<OrderUnit> findOrderUnitById(Order order, Long id) {
+        return order.getOrderUnits().stream().filter(unit -> unit.getDish().getId().equals(id)).findFirst();
     }
 
     public Order addDish(Order order, Dish dish, int quantity) {
-        OrderUnit unit = this.findOrderUnitById(order, dish.getId());
+        Optional<OrderUnit> unit = this.findOrderUnitById(order, dish.getId());
 
-        if (unit == null) {
-            unit = new OrderUnit();
-            unit.setQuantity(0);
-            unit.setDish(dish);
-            order.getOrderUnits().add(unit);
+        if (!unit.isPresent()) {
+            unit = Optional.of(new OrderUnit());
+            unit.get().setQuantity(0);
+            unit.get().setDish(dish);
+            order.getOrderUnits().add(unit.get());
         }
-        int newQuantity = unit.getQuantity() + quantity;
+        int newQuantity = unit.get().getQuantity() + quantity;
         if (newQuantity <= 0) {
-            order.getOrderUnits().remove(unit);
+            order.getOrderUnits().remove(unit.get());
         } else {
-            unit.setQuantity(newQuantity);
+            unit.get().setQuantity(newQuantity);
         }
         return order;
     }
 
     public Order updateDish(Order order, Long id, int quantity) {
-        OrderUnit unit = this.findOrderUnitById(order, id);
-
-        if (unit != null) {
+        Optional<OrderUnit> unit = this.findOrderUnitById(order, id);
+        unit.ifPresent(u -> {
             if (quantity <= 0) {
-                order.getOrderUnits().remove(unit);
+                order.getOrderUnits().remove(unit.get());
             } else {
-                unit.setQuantity(quantity);
+                unit.get().setQuantity(quantity);
             }
-        }
+        });
         return order;
     }
 
     public Order removeDish(Order order, Dish dish) {
-        OrderUnit unit = this.findOrderUnitById(order, dish.getId());
-        if (unit != null) {
-            order.getOrderUnits().remove(unit);
-        }
+        Optional<OrderUnit> unit = this.findOrderUnitById(order, dish.getId());
+        unit.ifPresent(u -> order.getOrderUnits().remove(unit.get()));
         return order;
     }
 
     public Order updateQuantity(Order order1, Order order2) {
-        if (order2 != null) {
+        Optional.ofNullable(order2).ifPresent(o->{
             List<OrderUnit> units = order2.getOrderUnits();
-            units.forEach(unit->this.updateDish(order1, unit.getDish().getId(), unit.getQuantity()));
-        }
+            units.forEach(unit -> this.updateDish(order1, unit.getDish().getId(), unit.getQuantity()));
+        });
         return order1;
     }
 

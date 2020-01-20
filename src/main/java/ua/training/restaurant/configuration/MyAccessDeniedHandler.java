@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Created by Student
+ */
 @Slf4j
 @Component
 public class MyAccessDeniedHandler implements AccessDeniedHandler {

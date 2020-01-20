@@ -1,5 +1,6 @@
 package ua.training.restaurant.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,10 @@ import ua.training.restaurant.service.UserService;
 
 import javax.validation.Valid;
 
+/**
+ * Created by Student
+ */
+@Slf4j
 @Controller
 public class SecurityController {
     private final UserService userService;
@@ -25,12 +30,13 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String loginPage() {
+        log.info("getting login page");
         return "login";
     }
 
     @GetMapping("/signup")
     public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user) {
-
+        log.info("getting signup page");
         modelAndView.addObject("user", user);
         modelAndView.setViewName("signup");
 
@@ -38,20 +44,23 @@ public class SecurityController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult) {
-        if (userService.isUserExists(user.getUsername())) {
-            modelAndView.addObject("failureMessage","signup.label.alreadyRegistered");
-            modelAndView.setViewName("signup");
-            bindingResult.reject("username");
-        }
-        if (bindingResult.hasErrors() || !UtilityController.checkUserFieldsWithRegex(user)) {
-            modelAndView.addObject("failureMessage","signup.label.error");
+    public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult result) {
+        log.info("trying to register new user");
+        if (result.hasErrors()) {
+            log.error("Invalid data");
+            modelAndView.addObject("failureMessage", "signup.label.error");
             modelAndView.setViewName("signup");
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userService.setDefaultParams(user);
-            userService.saveOrUpdate(user);
-            modelAndView.setViewName("signup");
+            try {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                userService.setDefaultParams(user);
+                userService.saveOrUpdate(user);
+                modelAndView.setViewName("redirect:/login");
+            } catch (Exception e) {
+                log.error("username already exists");
+                modelAndView.addObject("failureMessage", "signup.label.alreadyRegistered");
+                modelAndView.setViewName("signup");
+            }
         }
         return modelAndView;
     }

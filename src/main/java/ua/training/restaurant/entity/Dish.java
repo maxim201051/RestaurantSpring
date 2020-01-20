@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * Created by Student
+ */
 @Getter
 @Setter
 @Builder
@@ -25,7 +28,4 @@ public class Dish {
     private Long portion; //in grams
     @Column(nullable = false)
     private Long price; //in US pennies
-    @Column(nullable = false)
-    private int quantity;
-
 }

@@ -9,6 +9,9 @@ import ua.training.restaurant.entity.user.User;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Student
+ */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByUser(User user);

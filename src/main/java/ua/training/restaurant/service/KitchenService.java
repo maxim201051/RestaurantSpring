@@ -7,7 +7,9 @@ import ua.training.restaurant.entity.order.Order_Status;
 
 import static java.time.LocalDateTime.now;
 
-//Аля заглушка
+/**
+ * Created by Student
+ */
 @Service
 @Slf4j
 public class KitchenService {

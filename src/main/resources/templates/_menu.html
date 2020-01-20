@@ -8,7 +8,7 @@
             Home
         </a>
         |
-        <th:block sec:authorize="">
+        <th:block sec:authorize="hasAuthority('ROLE_USER')">
             <a th:href="@{/user/foodmenu}" th:text="#{foodmenu.title}"></a>
             |
             <a th:href="@{/user/shoppingcart}" th:text="#{shoppingcart.title}"></a>
@@ -21,7 +21,7 @@
             |
         </th:block>
 
-        <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+        <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
             <a th:href="@{/admin/orderconfirmation}" th:text="#{orderconfirmation.title}"></a>
             |
             <a th:href="@{/admin/billmaking}" th:text="#{billmakint.title}"></a>
