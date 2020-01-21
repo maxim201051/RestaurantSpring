@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/logout").authenticated();
         //Admin pages
         http.authorizeRequests().antMatchers("/user/**")
-                .access("hasAuthority(T(ua.training.restaurant.entity.user.Role).USER.getAuthority())");
+                .access("hasAuthority('ROLE_USER')");
         //User pages
         http.authorizeRequests().antMatchers("/admin/**")
-                .access("hasAuthority(T(ua.training.restaurant.entity.user.Role).ADMIN.getAuthority())");
+                .access("hasAuthority('ROLE_ADMIN')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/");
 
         // Config for Login Form

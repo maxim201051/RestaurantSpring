@@ -9,7 +9,7 @@
         </a>
         |
         <th:block sec:authorize="hasAuthority('ROLE_USER')">
-            <a th:href="@{/user/foodmenu}" th:text="#{foodmenu.title}"></a>
+            <a th:href="@{/user/foodmenu(page=1)}" th:text="#{foodmenu.title}"></a>
             |
             <a th:href="@{/user/shoppingcart}" th:text="#{shoppingcart.title}"></a>
             |
