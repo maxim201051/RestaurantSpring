@@ -49,6 +49,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 
         String authorisedURLRedirect = "";
 
+        @SuppressWarnings("unchecked")
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
                 .getContext().getAuthentication().getAuthorities();
 

@@ -14,7 +14,7 @@ public class Utils {
 
         Order order = (Order) request.getSession().getAttribute("myOrder");
 
-        if (!Optional.ofNullable(order).isPresent()) { //TODO Optional, Singleton
+        if (!Optional.ofNullable(order).isPresent()) {
             order = new Order();
             request.getSession().setAttribute("myOrder", order);
         }

@@ -27,5 +27,5 @@ public class Dish {
     @Column(nullable = false)
     private Long portion; //in grams
     @Column(nullable = false)
-    private Long price; //in US pennies
+    private Long price;
 }

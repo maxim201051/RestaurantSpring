@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Student
@@ -82,7 +83,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/foodmenu") //TODO 2 params
+    @GetMapping("/foodmenu")
     public ModelAndView foodMenuPage(ModelAndView modelAndView, @RequestParam Integer page) {
         log.info("getting foodmenu page number " + page);
         Pageable pageable = PageRequest.of(page - 1, NUMBER_OF_DISHES_ON_PAGE);
