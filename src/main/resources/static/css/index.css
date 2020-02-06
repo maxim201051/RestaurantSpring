@@ -8,11 +8,10 @@ body {
 
 .header {
     height: 100vh;
-    background-image:
-            linear-gradient(to right bottom,
-            rgba(255, 76, 101, 0.38),
-            rgba(217, 161, 30, 0.8)),
-            url('https://www.zdorovieinfo.ru/wp-content/uploads/2018/11/shutterstock_360327563.jpg');
+    background-image: linear-gradient(to right bottom,
+    rgba(255, 76, 101, 0.38),
+    rgba(217, 161, 30, 0.8)),
+    url('https://www.zdorovieinfo.ru/wp-content/uploads/2018/11/shutterstock_360327563.jpg');
 
     background-size: cover;
     background-position: top;
@@ -27,7 +26,9 @@ body {
     left: 40px;
 }
 
-.brand { font-size: 20px; }
+.brand {
+    font-size: 20px;
+}
 
 .text-box {
     position: absolute;

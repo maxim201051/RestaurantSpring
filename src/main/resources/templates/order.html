@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{order.title}"></title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userstatistics.css}">
+    <link rel="stylesheet" th:href="@{/css/userstatistics.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -37,7 +37,8 @@
                         <td><span th:text="${order_unit.dish.nameUa}"> Name UA</span></td>
                         <td><span th:text="${order_unit.dish.nameEn}"> Name EN </span></td>
                         <td><span th:text="${order_unit.dish.portion}"> Portion </span></td>
-                        <td><span th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span></td>
+                        <td><span th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span>
+                        </td>
                         <td><span th:text="${order_unit.quantity}"> Quantity </span></td>
                     </tr>
                     </tbody>

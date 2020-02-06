@@ -1,9 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
+<link rel="stylesheet" th:href="@{/css/menu.css}" type="text/css"/>
 <div class="menu-row">
     <div class="menu-container"
-         xmlns:th="http://www.thymeleaf.org"
-         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+         xmlns:th="http://www.thymeleaf.org">
         <a th:href="@{/}" th:text="#{main.page}"></a>
         |
         <th:block sec:authorize="hasAuthority('ROLE_USER')">
@@ -29,19 +29,19 @@
         </th:block>
     </div>
     <div class="header-container"
-         xmlns:th="http://www.thymeleaf.org"
-         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+         xmlns:th="http://www.thymeleaf.org">
         <div class="header-bar">
             <th:block sec:authorize="isAuthenticated()">
                 <a th:utext="${#request.userPrincipal.name}">..</a>
                 &nbsp;|&nbsp;
-                <a th:text="#{authentication.label.logout}" th:href="@{/logout}">Logout</a>
+                <a th:href="@{/logout}" th:text="#{authentication.label.logout}">Logout</a>
             </th:block>
             |
             <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
-            <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'en').toUriString()}}" th:text="#{lang.en}"></a>
-            |
-            <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'ua').toUriString()}}" th:text="#{lang.ua}"></a>
+                <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'en').toUriString()}}" th:text="#{lang.en}"></a>
+                |
+                <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'ua').toUriString()}}" th:text="#{lang.ua}"></a>
             </a>
             |
         </div>

@@ -37,7 +37,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
-    @Size(min=3,max=100)
+    @Size(min = 3, max = 100)
     private String password;
     @Column(nullable = false, columnDefinition = "int8 check(funds between 0 and 1000000)")
     private Long funds; //in US pennies

@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{shoppingcart.title}"></title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    <link href="/../css/index.css"
+          rel="stylesheet"
+          th:href="@{/css/userstatistics.css}" type="text/css"
     />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -26,11 +26,11 @@
     <div class="container-table">
         <div class="page-title" th:align="center" th:text="#{shoppingcart.label.yourOrder}"></div>
         <div class="wrap-table">
-            <div th:align="center" th:if="${failureMessage}"
-                 class="alert alert-danger" role="alert"
+            <div class="alert alert-danger" role="alert"
+                 th:align="center" th:if="${failureMessage}"
                  th:text="#{${failureMessage}}">
             </div>
-            <form method="post" action="/user/saveorder">
+            <form action="/user/saveorder" method="post">
                 <div class="table">
                     <table th:object="${order}">
                         <thead class="table-head">
@@ -58,17 +58,17 @@
                             <td><span
                                     th:text="${#numbers.formatDecimal(order_unit.dish.price,3,2,'COMMA')}"> Price </span>
                             </td>
-                            <td><input type="number" th:value="${order_unit.quantity}"/></td>
+                            <td><input th:value="${order_unit.quantity}" type="number"/></td>
                             <td><a th:text="#{shoppingcart.button.updateQuantity}">Update Quantity</a></td>
                             <td><span th:text="${order_unit.amount}"> Total Cost </span></td>
-                            <td><a th:text="#{shoppingcart.button.delete}"
-                                   th:href="@{/user/shoppingcartremovedish(id=${order_unit.dish.id})}">Delete</a></td>
+                            <td><a th:href="@{/user/shoppingcartremovedish(id=${order_unit.dish.id})}"
+                                   th:text="#{shoppingcart.button.delete}">Delete</a></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div th:align="center">
-                    <button class="btn" type="submit" th:text="#{shoppingcart.button.confirmOrder}"></button>
+                    <button class="btn" th:text="#{shoppingcart.button.confirmOrder}" type="submit"></button>
                 </div>
             </form>
         </div>

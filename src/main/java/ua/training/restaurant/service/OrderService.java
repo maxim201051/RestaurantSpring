@@ -7,10 +7,11 @@ import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.EmptyOrderException;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
 
+import java.util.List;
+
 /**
  * Created by Student
  */
-import java.util.List;
 
 public interface OrderService {
     List<Order> findByUser(User user);

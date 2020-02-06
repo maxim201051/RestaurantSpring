@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{addfunds.title}"></title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css"/>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" rel="stylesheet">
 </head>
 <body>
 <th:block th:include="/_menu"/>
-    <div align="center" th:action="@{addfunds}" class="container" th:object="${user}">
-        <h1 th:text="#{addfunds.label.header}"></h1>
-        <p>
-            <label th:text="#{addfunds.label.currentfunds}"></label>
-            <label th:text="*{funds}"></label>
-        </p>
-        <div th:align="center" th:if="${failureMessage}"
-             class="alert alert-danger" role="alert"
-             th:text="#{${failureMessage}}">
-        </div>
-        <form th:action="@{addfunds}" action="#" method="post">
-            <h2 class="form-signin-heading" th:text="#{authentication.label.enterData}"></h2>
-            <p>
-                <label for="funds" class="sr-only"></label>
-                <input type="number" id="funds" name="funds" class="form-control" th:placeholder="#{addfunds.label.amount}"
-                       required autofocus>
-            </p>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{addfunds.button.add}"></button>
-        </form>
+<div align="center" class="container" th:action="@{addfunds}" th:object="${user}">
+    <h1 th:text="#{addfunds.label.header}"></h1>
+    <p>
+        <label th:text="#{addfunds.label.currentfunds}"></label>
+        <label th:text="*{funds}"></label>
+    </p>
+    <div class="alert alert-danger" role="alert"
+         th:align="center" th:if="${failureMessage}"
+         th:text="#{${failureMessage}}">
     </div>
+    <form action="#" method="post" th:action="@{addfunds}">
+        <h2 class="form-signin-heading" th:text="#{authentication.label.enterData}"></h2>
+        <p>
+            <label class="sr-only" for="funds"></label>
+            <input autofocus class="form-control" id="funds" name="funds" required
+                   th:placeholder="#{addfunds.label.amount}" type="number">
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" th:text="#{addfunds.button.add}" type="submit"></button>
+    </form>
+</div>
 </body>
 </html>

@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Order updateQuantity(Order order1, Order order2) {
-        Optional.ofNullable(order2).ifPresent(o->{
+        Optional.ofNullable(order2).ifPresent(o -> {
             List<OrderUnit> units = order2.getOrderUnits();
             units.forEach(unit -> this.updateDish(order1, unit.getDish().getId(), unit.getQuantity()));
         });

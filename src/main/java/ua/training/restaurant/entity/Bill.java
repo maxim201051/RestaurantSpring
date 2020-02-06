@@ -19,9 +19,9 @@ public class Bill {
     private Long totalCost;
 
     public Bill(Order order) {
-        this.id=order.getId();
-        this.user=order.getUser();
-        this.orderUnits=order.getOrderUnits();
-        this.totalCost=order.getAmountTotal();
+        this.id = order.getId();
+        this.user = order.getUser();
+        this.orderUnits = order.getOrderUnits();
+        this.totalCost = order.getAmountTotal();
     }
 }

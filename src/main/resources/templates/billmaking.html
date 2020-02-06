@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{billmakint.title}"></title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    <link href="/../css/index.css"
+          rel="stylesheet"
+          th:href="@{/css/userstatistics.css}" type="text/css"
     />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -26,8 +26,8 @@
     <div class="container-table">
         <div class="page-title" th:align="center" th:text="#{billmaking.label.userOrders}"></div>
         <div class="wrap-table">
-            <div th:align="center" th:if="${failureMessage}"
-                 class="alert alert-danger" role="alert"
+            <div class="alert alert-danger" role="alert"
+                 th:align="center" th:if="${failureMessage}"
                  th:text="#{${failureMessage}}">
             </div>
             <div class="table">
@@ -50,9 +50,13 @@
                         <td><span th:text="${order.id}"> Order Number </span></td>
                         <td><span th:text="${order.user.username}"> Username </span></td>
                         <td><span th:text="${order.quantityTotal}"> Total Quantity </span></td>
-                        <td><span th:text="${#numbers.formatDecimal(order.amountTotal,3,2,'COMMA')}"> Total Cost </span></td>
-                        <td><span th:text="${#temporals.format(order.created,'dd-MM-yyyy HH:mm')}"> Creation Date </span></td>
-                        <td><a th:text="#{billmaking.button.makeBill}" th:href="@{/admin/makebill(id=${order.id})}"> Make Bill </a></td>
+                        <td><span th:text="${#numbers.formatDecimal(order.amountTotal,3,2,'COMMA')}"> Total Cost </span>
+                        </td>
+                        <td><span
+                                th:text="${#temporals.format(order.created,'dd-MM-yyyy HH:mm')}"> Creation Date </span>
+                        </td>
+                        <td><a th:href="@{/admin/makebill(id=${order.id})}" th:text="#{billmaking.button.makeBill}">
+                            Make Bill </a></td>
                     </tr>
                     </tbody>
                 </table>

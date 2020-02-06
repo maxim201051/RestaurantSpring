@@ -13,10 +13,10 @@ import static java.time.LocalDateTime.now;
 @Service
 @Slf4j
 public class KitchenService {
-   public static Order cookDishes(Order order) {
-       log.info("Order is cooking");
-       order.setStatus(Order_Status.READY);
-       order.setReady(now());
-       return order;
-   }
+    public static Order cookDishes(Order order) {
+        log.info("Order is cooking");
+        order.setStatus(Order_Status.READY);
+        order.setReady(now());
+        return order;
+    }
 }

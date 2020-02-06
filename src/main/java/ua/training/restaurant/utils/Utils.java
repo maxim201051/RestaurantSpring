@@ -32,8 +32,9 @@ public class Utils {
     public static Order getLastOrderedOrderInSession(HttpServletRequest request) {
         return (Order) request.getSession().getAttribute("lastOrderedOrder");
     }
+
     public static void throwExIfFundsNotValid(Long funds) {
-        if (funds<0 || funds>100000)
+        if (funds < 0 || funds > 100000)
             throw new IllegalArgumentException();
     }
 }

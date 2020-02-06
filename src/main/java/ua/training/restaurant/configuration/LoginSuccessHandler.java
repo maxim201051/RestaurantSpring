@@ -35,9 +35,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         }
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
+
     /**
      * This method extracts the roles of currently logged-in user and returns
      * appropriate URL according to his/her role.
+     *
      * @param authentication
      * @return
      */
@@ -65,14 +67,17 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     /**
      * Check is user have user authority
+     *
      * @param roles
      * @return
      */
     private boolean isUser(List<String> roles) {
         return roles.contains(Role.USER.getAuthority());
     }
+
     /**
      * Check is user have admin authority
+     *
      * @param roles
      * @return
      */

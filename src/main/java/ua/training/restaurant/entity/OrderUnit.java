@@ -1,6 +1,9 @@
 package ua.training.restaurant.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -21,8 +24,9 @@ public class OrderUnit {
     @ManyToOne
     private Dish dish;
     private Integer quantity;
+
     public OrderUnit() {
-        this.quantity=0;
+        this.quantity = 0;
     }
 
     public Long getAmount() {

@@ -1,6 +1,9 @@
 package ua.training.restaurant.entity.order;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ua.training.restaurant.entity.OrderUnit;
@@ -28,7 +31,7 @@ public class Order {
     private Long id;
     @ManyToOne
     private User user;
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private List<OrderUnit> orderUnits;
     private LocalDateTime created, accepted, ready, paid;

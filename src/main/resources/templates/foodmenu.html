@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{foodmenu.title}"></title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="/../css/index.css" th:href="@{/css/userstatistics.css}"
+    <link href="/../css/index.css"
+          rel="stylesheet"
+          th:href="@{/css/userstatistics.css}" type="text/css"
     />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -28,10 +28,10 @@
                 <table th:object="${dishes}">
                     <thead class="table-head">
                     <tr>
-                        <th th:text="#{foodmenu.table.nameEn}">Name en </th>
-                        <th th:text="#{foodmenu.table.nameUa}"> Name ua </th>
-                        <th th:text="#{foodmenu.table.portion}"> Portion </th>
-                        <th th:text="#{foodmenu.table.price}"> Price </th>
+                        <th th:text="#{foodmenu.table.nameEn}">Name en</th>
+                        <th th:text="#{foodmenu.table.nameUa}"> Name ua</th>
+                        <th th:text="#{foodmenu.table.portion}"> Portion</th>
+                        <th th:text="#{foodmenu.table.price}"> Price</th>
                         <th th:text="#{foodmenu.button.addtoorder}"> Add to order</th>
                     </tr>
                     </thead>
@@ -41,13 +41,15 @@
                         <td><span th:text="${dish.nameUa}"> Name UA</span></td>
                         <td><span th:text="${dish.portion}"> Portion </span></td>
                         <td><span th:text="${dish.price}"> Price </span></td>
-                        <td><a th:text="#{foodmenu.button.addtoorder}" th:href="@{/user/buyproduct(id=${dish.id})}"> Add to order</a></td>
+                        <td><a th:href="@{/user/buyproduct(id=${dish.id})}" th:text="#{foodmenu.button.addtoorder}"> Add
+                            to order</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div th:align="center">
-                <a class="btn" href="/signup" th:text="#{foodmenu.button.confirmation}" th:href="@{/user/shoppingcart}"></a>
+                <a class="btn" href="/signup" th:href="@{/user/shoppingcart}"
+                   th:text="#{foodmenu.button.confirmation}"></a>
             </div>
         </div>
     </div>

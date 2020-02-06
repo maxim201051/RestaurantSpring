@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{home.title}"></title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="/../css/index.css" th:href="@{/css/index.css}"
+    <link href="/../css/index.css"
+          rel="stylesheet"
+          th:href="@{/css/index.css}" type="text/css"
     />
 </head>
 <body>
@@ -20,7 +20,7 @@
             <span class="heading-primary-main" th:text="#{index.label.primaryHeading}"></span>
             <span class="heading-primary-sub" th:text="#{index.label.secondaryHeading}"></span>
         </h1>
-        <a href="/login" th:text="#{index.button.lestEat}" class="btn btn-white btn-animated">Let's eat</a>
+        <a class="btn btn-white btn-animated" href="/login" th:text="#{index.button.lestEat}">Let's eat</a>
     </div>
 </header>
 <th:block th:include="/_footer"/>

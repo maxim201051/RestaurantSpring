@@ -49,7 +49,7 @@ public class AdminController {
             modelAndView.addObject("orders", orders);
             modelAndView.setViewName("concreteuserstatistic");
         } catch (Exception e) {
-            log.error("cannot find user by id "+id);
+            log.error("cannot find user by id " + id);
             modelAndView.setViewName("redirect:/admin/userstatistics");
         }
         return modelAndView;
@@ -69,7 +69,7 @@ public class AdminController {
         try {
             orderService.confirmOrder(id);
         } catch (OrderNotFoundException e) {
-            log.error("cannot find order by id "+id);
+            log.error("cannot find order by id " + id);
             redir.addFlashAttribute("failureMessage", "order.label.failureMessage");
         }
         modelAndView.setViewName("redirect:/admin/orderconfirmation");
@@ -93,7 +93,7 @@ public class AdminController {
             order.setStatus(Order_Status.UNPAID);
             orderService.update(order);
         } catch (OrderNotFoundException e) {
-            log.error("cannot find order by id "+id);
+            log.error("cannot find order by id " + id);
             redir.addFlashAttribute("failureMessage", "order.label.failureMessage");
         }
         modelAndView.setViewName("redirect:/admin/billmaking");
